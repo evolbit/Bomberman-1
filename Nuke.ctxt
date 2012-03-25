@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.params=newX\ newY\ newRadius\ newOwner
+comment0.target=Nuke(int,\ int,\ int,\ Player)
+comment1.params=
+comment1.target=void\ explode()
+comment2.params=
+comment2.target=void\ cleanup()
+comment3.params=
+comment3.target=java.lang.String\ toString()
+numComments=4

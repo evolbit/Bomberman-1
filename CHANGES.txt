@@ -1,0 +1,206 @@
+[TOC]
+[BEGIN-CHANGES]
+January 13, 2008:
+-JScrollPane for Lobby works. The header row is built into the JScrollPane so that it covers the columns correctly.
+-Created LevelDetailPanel which is opened when a level name label is clicked. Shows the fields of any level.
+-Created LobbyPanelHandler which deals with switching between JPanels in the Lobby.
+-Wrote static methods encURL(), decURL(), decAL() for BombermanPanel. The parts of a line returned by getLineArrayFromAddr() are automatically decoded now. Server and Level automatically encode URL parts as well.
+January 12, 2008:
+-Continuing to work on the lobby. Created classes Server and Level in the past few days so that the ServerPanel and LevelPanel use more objects. Remove ability to change "My Alias" after entering it in. The lobby is not finished and still needs to be cleaned up a lot. ServerPanel and LevelPanel need to be put in a JScrollPane so that they are scrollable. Must separate header row to do this.
+January 6, 2008:
+-Finished mirHoriz() and mirVert() in Grid.
+January 5, 2008:
+-Only allow alphanumeric characters in the Lobby alias.
+-Began mirHoriz() and mirVert() in Grid. Need to clone Warps, RemoteMines, and RemoteMineTriggers because these have properties that are updated in the mirror image. ProximityMine should also be cloned in case its radius is ever changed.
+January 4, 2008:
+-Changed all dates in file header comments to YYYY-MM-DD format.
+-Implemented interchangeable ServerPanel and LevelPanel for Lobby. Choosing a level from a list from the server works now.
+-Renamed all levels to levelx.txt.
+January 1, 2008:
+-Improved server list in LobbyPanel.
+-Updated copyright dates to 2008.
+December 31, 2007:
+-Lobby components have been reorganized.
+-LobbyPanel has been implemented. Joing/leaving/creating a server is functional.
+-Need to create a LevelChooser that gets the list of levels from the server to choose from when creating a new server.
+December 30, 2007:
+-Added static final instance variables in BombermanPanel cver and webPath.
+-The JEditorPane in Changelog now directly retrieves the changelog from its URL.
+-Started working on Lobby and LobbyPanel.
+December 28, 2007:
+-Created Changelog class which has its own main and is called by a "View Changelog" MenuItem in BombermanPanel. It shows the text retrieved from query.php?action=changelog in the MishkinEVIL.us server.
+-Created "Check For Updates" MenuItem in BombermanPanel which displays the current version and the latest version in a popup box. The latest version is retrieved from query.php?action=latest_version on the MishkinEVIL.us server.
+December 25, 2007:
+-Made animation timers stop after going off once. It isn't necessary for them to continue after switching the images until a Player moves again.
+-Temporary fix in paintComponent() of BombermanPanel of problem where it attempts to draw the Explosive that a Player is on when the Player is not actually on one. isOnExplosive in Player should be set to false so this doesn't happen.
+-Worked on level9.
+-Fixed Fire in explosion of multiple Explosives so a center Fire is shown when appropriate.
+-Fixed explosions that occur after they should have during the explosion of multiple Explosives.
+December 24, 2007:
+-Removed shiny and legacy block sets from Grid temporarily.
+-Removed some non-existent images from preloadImages() in Grid.
+-Improved getImageFromFile() from Grid. By default, use getImage() instead of createImage() so that image resources are shared between requests. createImage() is only necessary when reloading an animated image.
+-Compressed many gif images reducing the project size by over 500KB. Noticeable speed improvements.
+-Renamed getNbrNonIndestructibleBlocks() to getNbrDestructibleBlocks() in Grid.
+-Moved call to grid.reloadBombAnimations() to plantExplosive() in Player instead of the beginning of explode() in each Explosive.
+December 23, 2007:
+-Redid entire numbering system. 0 = Empty space. 1 = Player 1. 2 = Player 2. 100- = Blocks. 200- = Explosives. 300- = Powerups. 10- and 20- of each hundred is reserved for objects specific to Player 1 or Player 2. Powerup Boosters start 330. Every type of Powerup can now be added to levels.
+-Got rid of leftx.gif, rightx.gif, upx.gif, and downx.gif for Fire and replaced them with vertx.gif and horizx.gif.
+-If CTRL+0-9 does not cover the number of levels or objects for adding accelerators to menu items, use F1-F12 too.
+-Return an empty Grid in Grid constructor if the file was empty.
+-Added level10.dat by David.
+December 22, 2007:
+-Finished adding ReinforcedBlock and created image for it. All current levels use ReinforcedBlock instead of IndestructibleBlock. Made GateBlock extend ReinforcedBlock instead of Indestructible.
+-Made Bomb and UnstoppableBomb avoid blowing up a Warp.
+-Gave option to choose radius for ProximityMine in Level Maker.
+December 19, 2007:
+-Started ReinforcedBlock.
+December 18, 2007:
+-Made LevelMakerPanel save the current level if you try to Play... it.
+December 17, 2007:
+-Allow level name to be passed in String [] args for both Bomberman and LevelMaker.
+-doNewLevel() in LevelMakerPanel now accommodates creating a Grid for a certain file.
+-Added option to Edit... and Play... in BombermanPanel and LevelMakerPanel respectively.
+-Need to make doNewGame() and doNewLevel() must consistent between BombermanPanel and LevelMakerPanel.
+December 16, 2007:
+-Created warps array in Grid to keep track of all Warps so that their coordinates can be updated when inserting rows or columns in LevelMaker.
+-If a Warp sends a Player onto a GateBlock, open that GateBlock first.
+-Continued working on level9.
+December 14, 2007:
+-Improved some Grid methods.
+-Need to make Mines not have sequential explosions.
+-Started working on a level9.dat.
+-Removed name from Player.
+-Made RemoteMineTrigger remove itself from the remoteMineTriggers array instead of doing it in removeObjectAt() in Grid.
+-Fixed bug created in previous version with Warps that caused the game to crash.
+-Fixed bug where RemoteMineTriggers would remain in the remoteMineTriggers array in Grid after they were destroyed by an Explosive.
+December 13, 2007:
+-Improved commenting.
+-Organized Grid method order better.
+December 12, 2007:
+-Made all the Booster Powerups extend new abstract class Booster. A Booster Powerup can be replaced when Powerups are being dropped randomly. Keep track of nbrBoosters instead of nbrPowerups in Grid.
+-Created isBooster() in addition to isPowerup() in Grid. Use getNbrBoosters() in Grid instead of getNbrPowerups().
+-Bug: When multiple Mines go off an destroy each other, more explosions still keep going after they have all been destroyed.
+-Bug: When you put a Player in the Level Maker and then erase it and put something else over it, when you move the Player to another location it removes the thing that was put over it.
+-Fixed Fire so that when you go on it it goes back to the starting location.
+-Need to make it so if you're on an Explosive and die and other Explosives blow up before the one your on does, it blows up at the same time too.
+-Still trying to make Explosives work when they explode because of another Explosive when a Player is still on them.
+-Improvements to the player section in explodeAt() of Explosive. A Player on an Explosive triggered by another Explosive will not cause multiple explosions anymore.
+-Simplified moveObjectTo() in Grid.
+-usePowerup() in Powerup now returns true if the Powerup was used up and false if it wasn't (meaning that the Powerup caused the Player to move somewhere else instead).
+-Made RemoteMines highlight when a Player goes next to the RemoteMineTrigger for them.
+-Added ability to choose radius of RemoteMines in LevelMakerPanel.
+December 11, 2007:
+-Made improvements with choosing the sets for a RemoteMineTrigger in LevelMakerPanel.
+-Switched keys for Players so that Player 1 uses keys on the left and Player 2 uses keys on the right.
+-Fixed bug where Player could plant Explosive even if the Player did not exist in the Grid.
+-Improved Grid constructors by removing duplicate code and using better variable names.
+-Improved commenting.
+-Created isMovableTo() in Grid which uses isValidCoordinate(), isEmpty(), and isPowerup(). isPowerup() is new and is no longer part of isEmpty(). isMovableTo() is used when a key is pressed in BombermanPanel.
+-Created setAllGrids() in Grid which is used in doNewGame() in BombermanPanel and doNewLevel() in LevelMakerPanel.
+-Made updateCoordinates() private in Grid.
+-Removed gameover() from Grid.
+-Made Fire into a Powerup (extends).
+December 10, 2007:
+-Added Warp.
+-Added invert(), flipHoriz() and flipVert() to Grid to be used in LevelMakerPanel.
+-Improved level8 (added warps, inverted and flipped etc).
+-Made some methods in BombermanPanel and LevelMakerPanel private instead of public.
+-General improvements.
+December 8, 2007:
+-Renamed LandMine to ProximityMine. Removed instance variable live because they are always live (Player cannot plant them) and owner is always null.
+-Created RemoteMine which has a set and radius that can be indicated in the level file.
+-Created RemoteMineTrigger with uses sets to list the sets of RemoteMines that it corresponds to.
+-Added support from attribute list in level data files.
+-Created image for RemoteMineTrigger (uncovered) but need a covered one.
+-Found image of dynamite to use as image for RemoteMine.
+-Added RemoteMines and RemoteMineTriggers to level8.
+December 7, 2007:
+-Added Mine to LevelMaker.
+December 6, 2007:
+-Removed Universal Block.
+-Made important revisions to Grid methods addObject(), addObjectTo(), moveObjectTo(), removeObject(), and removeObjectAt(). 
+-Removed duplicate code and update nbrObjects, nbrPowerups, and nbrNonIndestructibleBlocks.
+-Added getNbrPowerups() and getNbrNonIndestructibleBlocks(). nbrObjects no longer ignores Powerups. No more need for nonIndestructibleBlocksFound in BombermanPanel.
+-Renamed Grid method getRandomPowerup() to addRandomPowerupTo() and getImageFrom() to getImageFromFile().
+-Removed Grid methods getColObjectArray(), getRowObjectArray(), and addImage().
+-Removed Player method updateGrid().
+-Created level10.dat
+December 5, 2007:
+-Added new image for LandMine.
+-Created images for Universal/Player1/Player2 GateBlock.
+-GateBlock is now functional and has been added to level8 and level9.
+-Moved player1 and player2 from BombermanPanel/LevelMakerPanel to Grid.
+-Added startingX and startingY in Player instead of Grid.
+-Got rid of all label instance variables (except infoLabel) in BombermanPanel and access them with statsLabels ArrayList instead.
+-Made Nuke use radius / 2 and Mine use radius / 1.5 (minimum 2 for both) to keep explosions under control.
+-Restricted imports as much as possible.
+-Included GPL license with project.
+December 4, 2007:
+-Added Shiny SemidestructibleBlock's but these need to be compressed since they are very slow.
+-Updated level9 a little.
+-fillWith() in Grid does not work yet.
+-Started GateBlock which has not been tested yet but an image has been added for it (need to add it to levelMaker too). Need images for player1 gate, player2 gate, and universal gate.
+December 3, 2007:
+-We need to make it so LandMines don't retrigger their neighbors if they have already been triggered to prevent a stackoverflow when there are lots of mines.
+-Made LandMine's trigger each other with a faster countDown so that LandMine's now successively explode instead of all at once.
+-Made SemidestructibleBlock's instantly destructible by (Land)Mine's or Nuke's.
+-Got rid of extra repaint()'s in LevelMakerPanel.
+December 2, 2007:
+-Fixed some image names and added images for SemidestructibleBlock.
+-Wrote updateStats() which is only called when: a MenuItem is chosen, the Player moves, an Explosive explodes, or a new game starts. This avoids stats labels updates every time the 30ms timer fires. But it does not speed it up much. Even when updateStats() is commented out, the program still slows down when the statsPanel is showing and speeds up when it is turned off. Thus, updating labels does not affect the problem. Maybe when statsPanel() is showing it updates itself a lot, but my code never calls repaint() for it. I tried doing setIgnoreRepaint(true) for statsPanel with no luck. 
+December 1, 2007:
+-Renamed UndestructableBlock to IndestructibleBlock and DestructableBlock to DestructibleBlock.
+-Only use 1 image for each Explosive for both players (ubomb1.jpg and ubomb2.jpg now just ubomb.jpg)
+November 30, 2007:
+-Added "Danger LandMine" image for LandMine.
+-LandMine works but buggy. Bug when an Explosive blows up LandMine from outside their radius.
+November 29, 2007:
+-Made SemidestructableBlock work.
+-Added LandMine.
+-Added moveTo() to Player which will call updateGrid() and handle nearby LandMines and more.
+-Renamed addExplosiveTo() to plantExplosive() for Player and got rid of unnecessary parameters.
+November 28, 2007:
+-Finished getRespFromDiag().
+-Made project work in BlueJ and as .jar by using InputStream and if that fails then FileReader.
+-Created abstract class Block and extending class SemidestructableBlock. All Blocks now get blown up with die() which might remove them.
+-Removed duplicate getRespFromDiag(), getFileFromOpenDialog(), and getFileFromSaveDialog() in LevelMakerPanel and added to BombermanPanel only as static.
+November 26, 2007:
+-Fixed bug with * in title when unsaved.
+-Began working on getRespFromDiag().
+November 25, 2007:
+-Implemented insertRows() and insertCols() in Grid.
+-Added right-click to delete in Level Maker.
+-Added tooltips to Level Maker and toString() for all Locatable objects.
+-Added * to Level Maker title when changes have been made without being saved.
+-Added auto-add of levelx.dat to BombermanPanel level menu.
+November 24, 2007:
+-Finished setCols(), setRows(), shiftCols(), and shiftRows() in Grid.
+-Added surround() to Grid.
+-Dragging objects in Level Maker now works.
+-LevelMaker finished.
+-Created level7.dat and fixed some bugs.
+-Need to implement insertRows() and insertCols() in Grid.
+November 23, 2007:
+-Grid on LevelMaker works but not finished.
+November 22, 2007:
+-Began working on Level Maker.
+November 19, 2007:
+-Added Explosive duration option.
+November 16, 2007:
+-Fixed bug where two Explosives killed someone twice when they were near their starting location.
+-Rewrote explodeAt() in Explosive.
+November 15, 2007:
+-Need to fix Nuke and add DeathBooster in place of Player.
+-Finished menus for changing Explosives and Powerups for Players with input dialogs.
+-Added smaller Nuke gif and shiny block set by Sam Keeley.
+November 14, 2007:
+-Added level4.dat
+November 9, 2007:
+-Added Powerup LifesBooster and images are not all set in Grid.
+November 8, 2007:
+-Need to make it work when bomb explodes and player never moves.
+-Powerup RadiusBooster and MaxLiveBombsBooster work
+November 7, 2007:
+-Planting a bomb works but updating the image is delayed by one move.
+[END-CHANGES]

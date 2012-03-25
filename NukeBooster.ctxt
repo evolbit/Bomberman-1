@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.params=newX\ newY
+comment0.target=NukeBooster(int,\ int)
+comment1.params=player
+comment1.target=boolean\ usePowerup(Player)
+comment2.params=
+comment2.target=java.lang.String\ toString()
+numComments=3

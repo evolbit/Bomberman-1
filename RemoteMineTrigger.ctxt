@@ -1,0 +1,24 @@
+#BlueJ class context
+comment0.params=newX\ newY\ newSets
+comment0.target=RemoteMineTrigger(int,\ int,\ java.util.ArrayList)
+comment1.params=
+comment1.target=java.util.ArrayList\ getSets()
+comment10.params=
+comment10.target=java.lang.String\ toString()
+comment2.params=newSets
+comment2.target=void\ setSets(java.util.ArrayList)
+comment3.params=p
+comment3.target=boolean\ usePowerup(Player)
+comment4.params=
+comment4.target=boolean\ cover()
+comment5.params=
+comment5.target=void\ uncover()
+comment6.params=
+comment6.target=void\ highlight()
+comment7.params=
+comment7.target=void\ unhighlight()
+comment8.params=
+comment8.target=boolean\ radiusEmpty()
+comment9.params=p
+comment9.target=boolean\ playerInRadius(Player)
+numComments=11
